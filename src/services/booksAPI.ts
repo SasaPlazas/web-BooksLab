@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const libraryAPI = createApi({
-  reducerPath: "libraryAPI",
+
+export const booksApi = createApi({
+  reducerPath: "booksApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://openlibrary.org/search.json?q=Queen10",
   }),
@@ -12,4 +13,4 @@ export const libraryAPI = createApi({
   }),
 });
 
-export const { useGetBooksQuery } = libraryAPI;
+export const { useGetBooksQuery } = booksApi;

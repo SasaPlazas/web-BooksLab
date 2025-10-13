@@ -1,26 +1,30 @@
+//import el useSelector 
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import BookCard from "../components/bookCard";
-import type { RootState } from "../store/store";
+//importar el type RootState
+import type { RootState } from "../redux/store";
+import { useGetBooksQuery } from "../services/booksAPI";
 
 function BooksPage() {
-  const bookList = useSelector((state: RootState) => state.book.bookList);
-  const navigate = useNavigate();
 
-
-  console.log(bookList);
+  //utilizar el useSelector para obtener el estado global
+  const books = useSelector((state: RootState) => state.book.books);
+  const { data: apiData } = useGetBooksQuery(10);
+  console.log(apiData);
 
   return (
     <>
-      <h1>Books List</h1>
-      <button onClick={() => navigate("/books/add")}>Add Book</button>
-      {bookList?.map((newBook) => (
+      <h1>Lista de libros</h1>
+
+      {books?.map((newBook) => (
+      
         <BookCard
           key={newBook.id}
           id={newBook.id}
           title={newBook.title}
           author={newBook.author}
           year={newBook.year}
+        
         />
       ))}
     </>
