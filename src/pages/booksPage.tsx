@@ -7,6 +7,9 @@ function BooksPage() {
   const bookList = useSelector((state: RootState) => state.book.bookList);
   const navigate = useNavigate();
 
+
+  console.log(bookList);
+
   return (
     <>
       <h1>Books List</h1>
