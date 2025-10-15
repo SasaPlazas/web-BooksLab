@@ -1,18 +1,18 @@
 //Un slice es un mini contexto, es una parte pequeña que forma el estado global. El estado global es el total de los slices.
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
- export interface Book {
-   id: string;
-   title: string;
-   author: string;
-   year?: number;
+export interface Book {
+  id: string;
+  title: string;
+  author: string;
+  year?: number;
 }
 //Estado inicial
 type InitialState = {
-    books: Book[];
-}
+  books: Book[];
+};
 const initialState: InitialState = {
-    books: []
+  books: [],
 };
 // 1. Darle un nombre al slice
 // 2. Pasar el estado inicial
@@ -32,3 +32,4 @@ export const booksSlice = createSlice({
 export const { saveBooks } = booksSlice.actions;
 //Exportar el reducer del slice
 export default booksSlice.reducer;
+//El store es el estado global, es decir, la suma de todos los slices. En este caso solo tenemos un slice que es booksSlice, pero en una app real podemos tener muchos slices.
