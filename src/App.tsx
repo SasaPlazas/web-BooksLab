@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import AddPage from "./pages/addPage";
+import EditBook from "./pages/editPage";
 
 function App() {
   
@@ -13,7 +14,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<BooksPage />} />
+        <Route path="/books" element={<BooksPage />} />
         <Route path="/addBook" element={<AddPage />} />
+        <Route path="/editPage/:id" element={<EditBook/>} />
       </Routes>
     </Router>
   );

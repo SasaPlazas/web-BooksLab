@@ -36,7 +36,7 @@ export const booksSlice = createSlice({
     },
     editBook: (state, action: PayloadAction<Book>) => { 
       const bookIndex = state.books.findIndex((book) => book.id === action.payload.id) //funcion de arreglos para encontrar el indice del libro que se quiere editar/ se puede usar Find ()
-      if (bookIndex !== -1) { 
+      if (bookIndex !== -1) { //-1 (no tiene indice)
         state.books[bookIndex] = action.payload // payload
       }
     }
@@ -44,7 +44,7 @@ export const booksSlice = createSlice({
   },
 });
 //Destructurar las actions para exportarlas de manera individual
-export const { saveBooks, addBooks } = booksSlice.actions;
+export const { saveBooks, addBooks, deleteBook, editBook } = booksSlice.actions;
 //Exportar el reducer del slice
 export default booksSlice.reducer;
 //El store es el estado global, es decir, la suma de todos los slices. En este caso solo tenemos un slice que es booksSlice, pero en una app real podemos tener muchos slices.
