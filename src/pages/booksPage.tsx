@@ -9,33 +9,29 @@ import { saveBooks } from "../redux/booksSlices";
 function BooksPage() {
   //utilizar el useSelector para obtener el estado global
   const books = useSelector((state: RootState) => state.book.books);
-  const { data: apiData, error } = useGetBooksQuery(10);
+  const { data: apiData, error } = useGetBooksQuery(20);
+  
   console.log(apiData);
 
 
   const dispatch = useDispatch();
 
-  if (apiData && !books?.length) {
-    const initialBooks = apiData.docs.map(
-      (book: {
-        cover_edition_key: string;
-        title: string;
-        author_name?: string[];
-        first_publish_year?: number;
-      }) => {
-      return {
-        id: book.cover_edition_key,
-        title: book.title,
-        author: book.author_name?.[0] ?? "",
-        year: book.first_publish_year,
-      };
+  // Evitar actualizar el estado durante el render: usar useEffect
+    if (apiData && !books.length) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const initialBooks = apiData.docs.map((book: any) => {
+        return {
+          id: book.cover_edition_key,
+          title: book.title,
+          author: book.author_name,
+          year: book.first_publish_year,
+        };
+      });
+      dispatch(saveBooks(initialBooks));
     }
-    );
-    
-    dispatch(saveBooks(initialBooks));
+
     if (error) alert("Se produjo un error obteniendo los libros");
-  
-  }
+
   return (
     <>
       <h1>Lista de libros</h1>
